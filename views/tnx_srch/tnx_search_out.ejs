@@ -1,0 +1,128 @@
+<%- include('../template/header'); %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Search Transaction</h1>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- SELECT2 EXAMPLE -->
+                <div class="card card-default">
+                    <div class="card-header">
+                        <!-- <h3 class="card-title">Search Transaction</h3> -->
+                        <div class="card-tools">
+                            <img src="/dist/img/BBPS.png" alt="BBPS" width="350" height="65">
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <form action="/tnx_srch" method="post">
+                            <div class="row" id="divToPrint">
+                                <div class="col-md-12">
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <!-- <th></th> -->
+                                                <th>#</th>
+                                                <% if(type == '1'){ %> <th>Mobile No</th> <% } %>
+                                                <th>Transaction date and time</th>
+                                                <th>Transaction ref no</th>
+                                                <th>Biller Id</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% var dtls = JSON.parse(dtls);
+                                                var i = 1;
+                                                dtls.forEach((data) => { %>
+                                                    <tr>
+                                                        <!-- <td><input type="radio" name="radio" id="radiotnxmobbas" value="2"></td> -->
+                                                        <td><%= i; %></td>
+                                                        <% if(type == '1'){ %> <td><%= JSON.parse(mob_no); %></td> <% } %>
+                                                        <td><%= new Date(data.$.txnDate).toLocaleString('en-IN'); %></td>
+                                                        <td><%= data.$.txnReferenceId; %></td>
+                                                        <td><%= data.$.billerId; %></td>
+                                                        <td><%= data.$.amount / 100; %></td>
+                                                        <td><span class="text-bold text-success"><%= data.$.txnStatus; %></span></td>
+                                                        <td><a href="/complaint?id=<%= data.$.txnReferenceId; %>">Complaint</a></td>
+                                                    </tr>
+                                            <% i++; }) %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <center><button type="button" class="btn btn-outline-success mt-4" onclick="printDiv()">Print</button></center>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <%- include('../template/footer'); %>
+
+    <script>
+        $(function () {
+            // $("#example1").DataTable({
+            // "responsive": true, "lengthChange": false, "autoWidth": false,
+            // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            });
+        });
+    </script>
+    <script>
+            function printDiv() {
+
+            var divToPrint = document.getElementById('divToPrint');
+
+            var WindowObject = window.open('', 'Print-Window');
+            WindowObject.document.open();
+            WindowObject.document.writeln('<!DOCTYPE html>');
+            WindowObject.document.writeln('<html><head><title></title><style type="text/css">');
+
+
+            WindowObject.document.writeln('@media print { .center { text-align: center;}' +
+                '                                         .inline { display: inline; }' +
+                '                                         .underline { text-decoration: underline; }' +
+                '                                         .left { margin-left: 315px;} ' +
+                '                                         .right { margin-right: 375px; display: inline; }' +
+                '                                          table { border-collapse: collapse; font-size: 10px;}' +
+                '                                          th, td { border: 1px solid black; border-collapse: collapse; padding: 6px;}' +
+                '                                           th, td { }' +
+                '                                         .border { border: 1px solid black; } ' +
+                '                                         .bottom { bottom: 5px; width: 100%; position: fixed ' +
+                '                                       ' +
+                '                                   } } </style>');
+            WindowObject.document.writeln('</head><body onload="window.print()">');
+            WindowObject.document.writeln(divToPrint.innerHTML);
+            WindowObject.document.writeln('</body></html>');
+            WindowObject.document.close();
+            setTimeout(function () {
+                WindowObject.close();
+            }, 10);
+
+            }
+        </script>

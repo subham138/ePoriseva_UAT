@@ -1,0 +1,151 @@
+<%- include('../template/header'); %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Search Transaction</h1>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+				<% if(message){ %>
+				<div class="alert alert-<%= message.type; %> alert-dismissible fade show" role="alert">
+					<strong><%= message.message; %></strong>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<% } %>
+                <!-- SELECT2 EXAMPLE -->
+                <div class="card card-default">
+                    <div class="card-header">
+                        <!-- <h3 class="card-title">Search Transaction</h3> -->
+                        <div class="card-tools">
+                            <img src="/dist/img/BBPS.png" alt="BBPS" width="350" height="65">
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <form action="/tnx_srch" method="post">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="icheck-success d-inline mr-4">
+                                            <input type="radio" name="radio" id="radiotnxbas" value="1">
+                                            <label for="radiotnxbas">
+                                                Transaction based
+                                            </label>
+                                        </div>
+                                        <div class="icheck-success d-inline mr-4">
+                                            <input type="radio" name="radio" id="radiotnxmobbas" value="2">
+                                            <label for="radiotnxmobbas">
+                                                Mobile based with date
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-md-5">
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label for="TxnReferenceId">Transaction ID</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="TxnReferenceId" id="TxnReferenceId" placeholder="Transaction ID" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label for="MobileNo">Mobile Number</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="number" class="form-control" name="MobileNo" id="MobileNo" placeholder="Mobile Number" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label for="">Date</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <span>From Date</span>
+                                                    <input type="date" class="form-control" name="FromDate" id="FromDate" disabled>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <span>To Date</span>
+                                                    <input type="date" class="form-control" name="ToDate" id="ToDate" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <center><button type="submit" class="btn btn-outline-success mt-4" id="submit">Proceed</button></center>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <%- include('../template/footer'); %>
+
+    <script>
+        $('input[name="radio"]').click(function(){
+            var checked = $('input[name="radio"]:checked').val();
+            switch(checked){
+                case "1":
+                    $('#TxnReferenceId').removeAttr('disabled');
+                    $('#MobileNo').attr('disabled', 'disabled');
+                    $('#FromDate').attr('disabled', 'disabled');
+                    $('#ToDate').attr('disabled', 'disabled');
+                    $('#MobileNo').val('');
+                    $('#FromDate').val('');
+                    $('#ToDate').val('');
+                    break;
+                case "2":
+                    $('#MobileNo').removeAttr('disabled');
+                    $('#FromDate').removeAttr('disabled');
+                    $('#ToDate').removeAttr('disabled');
+                    $('#TxnReferenceId').attr('disabled', 'disabled');
+                    $('#TxnReferenceId').val('');
+                    break;
+                default:
+                    break;
+            }
+            // alert(checked);
+        });
+
+        $('#submit').on('click', function(){
+            var checked = $('input[name="radio"]:checked').val();
+            if(checked == '1'){
+                if($('#TxnReferenceId').val() != ''){
+                    return true;
+                }else{
+                    alert('Please enter Transaction ID');
+                    return false;
+                }
+            }else if(checked == '2'){
+                if($('#MobileNo').val() != '' && $('#FromDate').val() != '' && $('#ToDate').val() != ''){
+                    return true;
+                }else{
+                    alert('Please fill all details');
+                    return false;
+                }
+            }
+        })
+    </script>

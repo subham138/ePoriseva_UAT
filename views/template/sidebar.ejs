@@ -1,0 +1,114 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4 main_sidebarCustom">
+    <!-- Brand Logo -->
+    <a href="/" class="brand-link navbar-danger navbarDangerCustom">
+        <img src="/dist/img/logoLogin.svg" alt="AdminLTE Logo" class="brand-image brandimageCustom">
+        <span class="brand-text font-weight-light">EPORISEVA</span>
+    </a>
+	<!-- floating button -->
+    <a href="uploads/user_manual_eporiseva.pdf" target="_blank" class="float" data-toggle="tooltip"
+        title="Click here to download user manual">
+        <i class="fa fa-download my-float"></i>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar sidebarCustom">
+        <!-- Sidebar user panel (optional) -->
+        <!--<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">
+                    User Name
+                </a>
+            </div>
+        </div>-->
+
+        <!-- SidebarSearch Form -->
+        <!-- <div class="form-inline">
+            <div class="input-group" data-widget="sidebar-search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-sidebar">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column nav-compact nav-child-indent navCustomLeft" data-widget="treeview"
+                role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+       with font-awesome or any other icon font library -->
+                <li class="nav-item" style="display:none;">
+                    <a href="/" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item" style="display:none;">
+                    <a href="/sample" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            Sample Pages
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/fetch_bill" class="nav-link  <%= (active=='fetch_bill' || active=='get_params' || active=='get_bill' || active=='conf_bill' || active=='quick_pay' || active=='pay_bill') ? 'active' : ''; %>">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            Pay Bill
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/tnx_srch" class="nav-link  <%= (active=='tnx_srch') ? 'active' : ''; %>">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            Search Transaction
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/search_complain" class="nav-link  <%= (active=='search_complain') ? 'active' : ''; %>">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            Search Complaint
+                        </p>
+                    </a>
+                </li>
+				
+				 <li class="nav-item">
+                    <a href="/report" class="nav-link  <%= (active=='report') ? 'active' : ''; %>">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            Report
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/sign_out" class="nav-link">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>
+                            Log Out
+                        </p>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

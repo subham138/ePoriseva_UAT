@@ -1,0 +1,60 @@
+<%- include('../template/header'); %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Transaction History</h1>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-md-12">
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <form action="/report" method="post">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="form-group row">
+                                                <label for="email" class="col-sm-3 col-form-label">From Date</label>
+                                                <div class="col-sm-7">
+                                                    <input type="date" class="form-control" name="frm_dt" id="frm_dt"
+                                                        autocomplete="off" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="form-group row">
+                                                <label for="email" class="col-sm-3 col-form-label">To Date</label>
+                                                <div class="col-sm-7">
+                                                    <input type="date" class="form-control" name="to_dt" id="to_dt"
+                                                        autocomplete="off" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <button type="submit" class="btn btn-danger float-right">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div><!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <%- include('../template/footer'); %>

@@ -1,0 +1,56 @@
+<%- include('../template/header'); %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Search Complaint</h1>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- SELECT2 EXAMPLE -->
+                <div class="card card-default">
+                    <div class="card-header">
+                        <h3 class="card-title">Search Complaint</h3>
+                        <div class="card-tools">
+                            <img src="/dist/img/BBPS_Logo.png" alt="BBPS" width="350" height="65">
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="row mt-5">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <% var dtls = JSON.parse(result);
+                                    dtls.forEach((data) => {
+                                %>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <label><%= data.DisplayName %></label>
+                                            <input type="text" class="form-control" value="<%= data.Value %>" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                        <!-- <div class="col-md-2"><label></div> -->
+                                <% }) %>
+                            </div>
+                        </div>
+                        <center><a href="/search_complain" type="button" class="btn btn-outline-success mt-4">Back</a></center>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <%- include('../template/footer'); %>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Receipt</title>
+</head>
+<style>
+    body {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 40%;
+    }
+
+    /* .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    } */
+
+    table {
+        width: 70%;
+    }
+    th, td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+
+</style>
+<body onload="print();">
+    <div class="card">
+        <table>
+            <tr><th colspan="2" class="text-right"><img src="/dist/img/bbps_assured.png" alt="" height="80px" width="80px"></th></tr>
+            <tr><th colspan="2"><h2 style="color: green;">Transaction Successfull...!</h2></th></tr>
+            <tr>
+                <td>Biller Name <span>:</span></td>
+                <td><%= BillarName; %></td>
+            </tr>
+            <tr>
+                <td>Biller Id <span class="pull-right">:</span></td>
+                <td><%= BlrId; %></td>
+            </tr>
+            <tr>
+                <td>Transaction Id <span class="pull-right">:</span></td>
+                <td><%= trns_id; %></td>
+            </tr>
+            <tr>
+                <td>Customer Name <span class="pull-right">:</span></td>
+                <td><%= CustomerName; %></td>
+            </tr>
+            <tr>
+                <td>Mobile Number <span class="pull-right">:</span></td>
+                <td><%= PayeePhoneNo; %></td>
+            </tr>
+            <tr>
+                <td>Biller Date <span class="pull-right">:</span></td>
+                <td><%= CustomerName; %></td>
+            </tr>
+            <tr>
+                <td>Biller Period <span class="pull-right">:</span></td>
+                <td><%= BillPeriod; %></td>
+            </tr>
+            <tr>
+                <td>Biller Number <span class="pull-right">:</span></td>
+                <td><%= BillNumber; %></td>
+            </tr>
+            <tr>
+                <td>Due Date <span class="pull-right">:</span></td>
+                <td><%= DueDate; %></td>
+            </tr>
+            <tr>
+                <td>Bill Amount <span class="pull-right">:</span></td>
+                <td><%= BASE_BILL_AMOUNT/100; %></td>
+            </tr>
+            <tr>
+                <td>CCF <span class="pull-right">:</span></td>
+                <td>0.00</td>
+            </tr>
+            <tr>
+                <td>Total Amount <span class="pull-right">:</span></td>
+                <td><%= BASE_BILL_AMOUNT/100; %></td>
+            </tr>
+            <tr>
+                <td>Tnx Date & Time <span class="pull-right">:</span></td>
+                <td><%= trns_dt; %></td>
+            </tr>
+            <tr>
+                <td>Init Channel <span class="pull-right">:</span></td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>Pay Mode <span class="pull-right">:</span></td>
+                <td><%= PayMode; %></td>
+            </tr>
+            <tr>
+                <td>Transaction Status <span class="pull-right">:</span></td>
+                <td><%= msg; %></td>
+            </tr>
+            <tr>
+                <td>Approval Number <span class="pull-right">:</span></td>
+                <td><%= AppRefNumber; %></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

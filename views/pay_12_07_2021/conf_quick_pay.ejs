@@ -1,0 +1,136 @@
+<%- include('../template/header'); %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Bill Pay</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item active">Bill Pay</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title"></h3>
+                                <div class="card-tools">
+                                    <img src="/dist/img/BBPS_Logo.png" alt="BBPS" width="350" height="65">
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="bs-stepper">
+                                    <div class="bs-stepper-header" role="tablist">
+                                        <!-- your steps here -->
+                                        <div class="step active" data-target="#logins-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="logins-part" id="logins-part-trigger" aria-selected="true">
+                                                <span class="bs-stepper-circle">1</span>
+                                                <span class="bs-stepper-label">Select Biller</span>
+                                            </button>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="step active" data-target="#information-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="information-part" id="information-part-trigger">
+                                                <span class="bs-stepper-circle">2</span>
+                                                <span class="bs-stepper-label">Confirm Biller</span>
+                                            </button>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="step active" data-target="#payment-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="payment-part" id="payment-part-trigger">
+                                                <span class="bs-stepper-circle">3</span>
+                                                <span class="bs-stepper-label">Payment</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="bs-stepper-content mt-4">
+                                        <!-- your steps content here -->
+                                        <div id="logins-part" class="content active dstepper-block" role="tabpanel"
+                                            aria-labelledby="logins-part-trigger">
+                                            <form action="/pay_bill" method="post">
+                                                <div class="row">
+                                                    <div class="col-md-4"></div>
+                                                    <div class="col-md-4">
+                                                        <div class="row">
+                                                            <div class="col-md-10">
+                                                                <div class="form-group">
+                                                                    <label for="cat_name">Biller Category</label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="cat_name" id="cat_name"
+                                                                        placeholder="Biller Category" value="<%= data.cat_name; %>" readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-10">
+                                                                <div class="form-group">
+                                                                    <label for="blr_name">Biller</label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="blr_name" id="blr_name"
+                                                                        placeholder="Biller Category" value="<%= data.blr_name; %>" readonly>
+                                                                </div>
+                                                            </div>
+                                                            <input type="hidden" name="BlrId" value="<%= data.BlrId; %>">
+                                                        </div>
+                                                        <% var params = JSON.parse(biller_params);
+                                                            params.forEach((dt) => {
+                                                                if(dt.InputField == "1" && dt.Optional == "0"){
+                                                                    var tag_name = dt.TagName;
+                                                                    var value = data[tag_name]; %>
+                                                                <div class="row">
+                                                                    <div class="col-md-10">
+                                                                        <div class="form-group">
+                                                                            <label for="<%= data.TagName %>"><%= dt.DisplayName %></label>
+                                                                            <input type="text" class="form-control"
+                                                                                name="<%= dt.TagName %>" id="<%= dt.TagName %>"
+                                                                                placeholder="<%= dt.DisplayName %>" value="<%= value %>" readonly>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        <% } }) %>
+                                                    </div>
+                                                    <div class="col-md-4"></div>
+                                                </div>
+                                                <input type="hidden" name="CatId" id="CatId" value="<%= data.CatId; %>">
+                                                <input type="hidden" name="coverage" id="coverage" value="<%= data.coverage; %>">
+                                                <input type="hidden" name="BillAcceptanceType" value="<%= data.BillAcceptanceType %>">
+                                                <div class="row mt-4">
+                                                    <div class="col-md-4"></div>
+                                                    <div class="col-md-4">
+                                                        <a type="button" href="/fetch_bill"
+                                                            class="btn btn-outline-danger btn-flat pull-left">
+                                                            <i class="fa fa-caret-left mr-2"></i>Previous</a>
+                                                        <button type="submit"
+                                                            class="btn btn-outline-success btn-flat pull-right"
+                                                            onclick="return check();">Pay
+                                                            <i class="fa fa-caret-right ml-2"></i></button>
+                                                    </div>
+                                                    <div class="col-md-4"></div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <%- include('../template/footer'); %>
+
+        

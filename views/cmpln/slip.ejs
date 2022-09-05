@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Complain</title>
+</head>
+<style>
+    body {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 40%;
+    }
+
+    /* .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    } */
+
+    table {
+        width: 70%;
+    }
+    th, td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+
+</style>
+<body>
+    <div class="card">
+        <table>
+            <tr><th colspan="2" class="text-right"><img src="/dist/img/bbps_b.png" alt="" height="80px" width="80px"></th></tr>
+            <tr><th colspan="2">Your complaint is registered <span style="color: green;">Successfull</span></th></tr>
+            <tr>
+                <td>Complaint Type:</td>
+                <td><%= compl_type %></td>
+            </tr>
+            <tr>
+                <td>Transaction ID: </td>
+                <td><%= tnx_id %></td>
+            </tr>
+            <% var dtls = JSON.parse(result);
+                dtls.forEach((data) => {
+                    %>
+                    <tr>
+                        <td><%= data.DisplayName %><span class="pull-right">:</span></td>
+                        <td><%= data.Value %></td>
+                    </tr>
+            <% }) %>
+            <tr>
+                <td>Date & Time: </td>
+                <td><%= trns_dt %></td>
+            </tr>
+        </table>
+        <div><center><a href="/search_complain" type="button" class="btn btn-outline-success mt-4">Back</a></center></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<%- include('../template/header'); %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Bill Pay</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item active">Bill Pay</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title"></h3>
+                                <div class="card-tools">
+                                    <img src="/dist/img/BBPS_Logo.png" alt="BBPS" width="350" height="65">
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="bs-stepper">
+                                    <div class="bs-stepper-header" role="tablist">
+                                        <!-- your steps here -->
+                                        <div class="step active" data-target="#logins-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="logins-part" id="logins-part-trigger" aria-selected="true">
+                                                <span class="bs-stepper-circle">1</span>
+                                                <span class="bs-stepper-label">Select Biller</span>
+                                            </button>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="step active" data-target="#information-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="information-part" id="information-part-trigger">
+                                                <span class="bs-stepper-circle">2</span>
+                                                <span class="bs-stepper-label">Confirm Biller</span>
+                                            </button>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="step active" data-target="#payment-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="payment-part" id="payment-part-trigger">
+                                                <span class="bs-stepper-circle">3</span>
+                                                <span class="bs-stepper-label">Payment</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="bs-stepper-content mt-4">
+                                        <!-- your steps content here -->
+                                        <div id="logins-part" class="content active dstepper-block" role="tabpanel"
+                                            aria-labelledby="logins-part-trigger">
+                                            <form action="/pay_bill" method="post">
+                                                <div class="row">
+                                                    <!-- <div class="col-md-4"></div> -->
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-3">
+                                                                        <label for="CatId">Biller Name</label>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <input type="text" class="form-control" name="BillarName" id="BillarName" placeholder="Biller Name" value="<%= data.BillarName; %>" readonly="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-6">
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-3">
+                                                                        <label for="CustomerName">Customer Name</label>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <input type="text" class="form-control" name="CustomerName" id="CustomerName" placeholder="Customer Name" value="<%= data.CustomerName; %>" readonly="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-6">
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-3">
+                                                                        <label for="BillDate">Bill Date</label>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <input type="text" class="form-control" name="BillDate" id="BillDate" placeholder="Bill Date" value="<%= data.BillDate; %>" readonly="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-6">
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-3">
+                                                                        <label for="BASE_BILL_AMOUNT">Bill Amount</label>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <input type="text" class="form-control" name="BASE_BILL_AMOUNT" id="BASE_BILL_AMOUNT" placeholder="Bill Amount" value="<%= data.BASE_BILL_AMOUNT; %>" readonly="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-6">
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-3">
+                                                                        <label>Payment Mode</label>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <input type="text" class="form-control" name="PayMode" id="PayMode" value="<%= data.PayMode; %>" readonly="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-6">
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-3">
+                                                                        <label for="Late Payment Fee">Late Payment Fee</label>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <input type="text" class="form-control" name="Late_Payment_Fee" id="Late_Payment_Fee" placeholder="Late Payment Fee" value="<%= data.Late_Payment_Fee; %>" readonly="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                
+                                                            <div class="col-md-6">
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-3">
+                                                                        <label for="Fixed Charges">Fixed Charges</label>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <input type="text" class="form-control" name="Fixed_Charges" id="Fixed_Charges" placeholder="Fixed Charges" value="<%= data.Fixed_Charges; %>" readonly="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                
+                                                            <div class="col-md-6">
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-3">
+                                                                        <label for="Additional Charges">Additional Charges</label>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <input type="text" class="form-control" name="Additional_Charges" id="Additional_Charges" placeholder="Additional Charges" value="<%= data.Additional_Charges; %>" readonly="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-3">
+                                                                        <label for="tot_amt">Total Amount</label>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <input type="text" class="form-control" name="tot_amt" id="tot_amt" placeholder="" value="<%= data.tot_amt; %>" readonly="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" name="RefId" value="<%= data.RefId %>">
+                                                    <input type="hidden" name="BlrId" value="<%= data.BlrId %>">
+                                                    <input type="hidden" name="BillAcceptanceType" value="0">
+                                                    <!-- <div class="col-md-4"></div> -->
+                                                </div>
+                                                <div class="row mt-4">
+                                                    <div class="col-md-4"></div>
+                                                    <div class="col-md-4">
+                                                        <a type="button" href="/fetch_bill"
+                                                            class="btn btn-outline-danger btn-flat pull-left">
+                                                            <i class="fa fa-caret-left mr-2"></i>Previous</a>
+                                                        <button type="submit"
+                                                            class="btn btn-outline-success btn-flat pull-right"
+                                                            onclick="return check();">Pay
+                                                            <i class="fa fa-caret-right ml-2"></i></button>
+                                                    </div>
+                                                    <div class="col-md-4"></div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <%- include('../template/footer'); %>
+
+        
+        <script>
+            function check(){
+                if($('#BlrId').val() != ''){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        </script>

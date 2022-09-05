@@ -1,0 +1,182 @@
+<%- include('../template/header'); %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Register Complaint</h1>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- SELECT2 EXAMPLE -->
+                <div class="card card-default">
+                    <div class="card-header">
+                        <h3 class="card-title">Raise Complaint</h3>
+                        <div class="card-tools">
+                            <img src="/dist/img/BBPS_Logo.png" alt="BBPS" width="350" height="65">
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <form action="/complaint" method="post">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="icheck-success d-inline mr-4">
+                                            <input type="radio" name="ComplaintType" id="radiotnxbas" value="1" checked>
+                                            <label for="radiotnxbas">
+                                                Transaction Based
+                                            </label>
+                                        </div>
+                                        <div class="icheck-success d-inline mr-4">
+                                            <input type="radio" name="ComplaintType" id="radioserbas" value="2">
+                                            <label for="radioserbas">
+                                                Service Based
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <label for="TxnReferenceId">Transaction Ref ID</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" name="TxnReferenceId" id="TxnReferenceId" placeholder="Transaction Ref ID" value="<%= tnx_id %>" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" id="part_display" style="display: none;">
+                                    <div class="form-group row">
+                                        <div class="col-md-4"><label>Participation Type</label></div>
+                                        <div class="col-md-7">
+                                            <select class="form-control select2" name="ParticipationType" id="ParticipationType">
+                                                <option value="">Select Participation Type</option>
+                                                <option value="2">Agent</option>
+                                                <option value="3">Biller</option>
+                                                <option value="4">System</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <div class="col-md-4"><label>Reason</label></div>
+                                        <div class="col-md-7">
+                                            <select class="form-control select2" name="Disposition" id="Disposition">
+                                                <option value="">Select Reason</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label for="TxnReferenceId">Description</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <textarea class="form-control" id="Description" name="Description" rows="3" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <center><button type="submit" class="btn btn-outline-success mt-4" id="submit">Submit</button></center>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <%- include('../template/footer'); %>
+
+    <script>
+        $(document).ready(function(){
+            var checked = $('input[name="ComplaintType"]:checked').val();
+            if(checked != '' && checked > 0){
+                $('input[name="ComplaintType"]:checked').click();
+            }
+        })
+    </script>
+
+    <script>
+        $('input[name="ComplaintType"]').click(function(){
+            var checked = $('input[name="ComplaintType"]:checked').val();
+            switch(checked){
+                case "1":
+                    $('#part_display').hide();
+                    $('#ParticipationType').attr('disabled', 'disabled');
+                    get_reason(checked);
+                    break;
+                case "2":
+                    $('#part_display').show();
+                    $('#ParticipationType').removeAttr('disabled');
+                    $('#ParticipationType').attr('requirde', 'required');
+                    $('#Disposition').empty();
+                    $('#Disposition').append($('<option>', {value: '', text: 'Select Reason'}));
+                    break;
+                default:
+                    break;
+            }
+            // alert(checked);
+        });
+
+        $('#ParticipationType').on('change', function(){
+            if($(this).val() != '' && $(this).val() > 0){
+                get_reason($(this).val());
+            }
+        })
+
+        function get_reason(id){
+            $.ajax({
+                type: "GET",
+                url: "/get_disposition",
+                data: {id: id},
+                dataType: 'html',
+                success: function (result) {
+                    var res = JSON.parse(result);
+                    // console.log(res.length);
+                    if(res.length > 0){
+                        $('#Disposition').empty();
+                        $('#Disposition').append($('<option>', {value: '', text: 'Select Reason'}));
+                        $.each(res, function (i, item) {
+                            $('#Disposition').append($('<option>', {value: item.disposition_list, text: item.disposition_list}));
+                        });
+                    }
+                }
+            })
+        }
+
+        // $('#submit').on('click', function(){
+        //     var checked = $('input[name="radio"]:checked').val();
+        //     if(checked == '1'){
+        //         if($('#TxnReferenceId').val() != ''){
+        //             return true;
+        //         }else{
+        //             alert('Please enter Transaction ID');
+        //             return false;
+        //         }
+        //     }else if(checked == '2'){
+        //         if($('#MobileNo').val() != '' && $('#FromDate').val() != '' && $('#ToDate').val() != ''){
+        //             return true;
+        //         }else{
+        //             alert('Please fill all details');
+        //             return false;
+        //         }
+        //     }
+        // })
+    </script>

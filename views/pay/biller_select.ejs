@@ -1,0 +1,399 @@
+<%- include('../template/header'); %>
+	<style>
+		#loader {
+			/* width: 600px; */
+			height: 450px;
+			margin: auto;
+		}
+
+		#loader.loading {
+			background: url(dist/img/loader1.gif) no-repeat center center;
+			/* width: 32px; */
+			margin: auto;
+		}
+	</style>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1></h1>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+					<div class="col-md-12">
+                        <div id="loader" class="loading img-center" style="display: none;"></div>
+                    </div>
+                    <div class="col-md-12" id="display-content">
+						<% if(message){ %>
+                        <div class="alert alert-<%= message.type; %> alert-dismissible fade show" role="alert">
+                            <strong><%= message.message; %></strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <% } %>
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title"></h3>
+                                <div class="card-tools">
+                                    <img src="/dist/img/BBPS_Logo.png" alt="BBPS" width="350" height="65">
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="bs-stepper">
+                                    <div class="bs-stepper-header" role="tablist">
+                                        <!-- your steps here -->
+                                        <div class="step active" data-target="#logins-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="logins-part" id="logins-part-trigger" aria-selected="true">
+                                                <span class="bs-stepper-circle">1</span>
+                                                <span class="bs-stepper-label">Select Biller</span>
+                                            </button>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="step" data-target="#information-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="information-part" id="information-part-trigger">
+                                                <span class="bs-stepper-circle">2</span>
+                                                <span class="bs-stepper-label">Confirm Biller</span>
+                                            </button>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="step" data-target="#payment-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="payment-part" id="payment-part-trigger">
+                                                <span class="bs-stepper-circle">3</span>
+                                                <span class="bs-stepper-label">Payment</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="bs-stepper-content mt-4">
+                                        <center><span>Kindly enter the biller category, Location or the biller name to select your desired biller</span></center>
+                                        <!-- your steps content here -->
+                                        <div id="logins-part" class="content active dstepper-block mt-4" role="tabpanel"
+                                            aria-labelledby="logins-part-trigger">
+                                            <form action="/fetch_bill" method="post">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="icheck-success d-inline mr-4">
+                                                                <input type="radio" name="radio" id="radioBilCat" value="1">
+                                                                <label for="radioBilCat">
+                                                                    Biller Category
+                                                                </label>
+                                                            </div>
+                                                            <!-- <div class="icheck-success d-inline mr-4">
+                                                                <input type="radio" name="radio" id="radioCov" value="2">
+                                                                <label for="radioCov">
+                                                                    Coverage
+                                                                </label>
+                                                            </div> -->
+                                                            <div class="icheck-success d-inline mr-4">
+                                                                <input type="radio" name="radio" id="radioBillNa" value="3">
+                                                                <label for="radioBillNa">
+                                                                    Biller Name
+                                                                </label>
+                                                            </div>
+                                                            <!-- <div class="icheck-success d-inline">
+                                                                <input type="radio" name="radio" id="radioBillId" value="4">
+                                                                <label for="radioBillId">
+                                                                    Biller ID
+                                                                </label>
+                                                            </div> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-4">
+                                                    <div class="col-md-6">
+                                                        <div class="row">
+                                                            <div class="col-md-10">
+                                                                <div class="form-group">
+                                                                    <label>Biller Category</label>
+                                                                    <select class="form-control" name="CatId" id="CatId" disabled>
+                                                                        <option value="">Select Biller Categories
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-10">
+                                                                <div class="form-group">
+                                                                    <label>Coverage</label>
+                                                                    <select class="form-control select2" name="StName" id="StName" disabled>
+                                                                        <option value="">Populated with all State Names and National</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-10">
+                                                                <div class="form-group">
+                                                                    <label></label>
+                                                                    <select class="form-control select2" name="Coverage" id="Coverage" disabled>
+                                                                        <option value="">Populated with all City Names Within a State</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="row">
+                                                            <div class="col-md-10">
+                                                                <div class="form-group">
+                                                                    <label for="biller_name">Biller Name</label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="BlrName" id="BlrName"
+                                                                        placeholder="Biller Name" disabled>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="row">
+                                                            <div class="col-md-10">
+                                                                <div class="form-group">
+                                                                    <label for="biller_id">Biller ID</label>
+                                                                    <input type="text" class="form-control" name="BlrId"
+                                                                        id="BlrId" placeholder="Biller ID" disabled>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="cat_name" id="cat_name" value="">
+												<input type="hidden" name="blr_name" id="blr_name" value="">
+                                                <button type="submit" class="btn btn-outline-info btn-flat mt-4" id="check"
+                                                    onclick="stepper.next()">
+                                                    <i class="fa fa-search mr-2"></i>Search</button>
+                                            </form>
+                                        </div>
+                                        <!-- <div id="information-part" class="content" role="tabpanel"
+                                            aria-labelledby="information-part-trigger">
+                                            <h1>Subham Samanta</h1>
+                                        </div>
+                                        <div id="payment-part" class="content" role="tabpanel"
+                                            aria-labelledby="payment-part-trigger">
+                                        </div> -->
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+        <%- include('../template/footer'); %>
+
+        <script>
+            $(document).ready(function(){
+                var radio = $('input[name="radio"]:checked').val();
+                // alert(radio);
+                if(radio > 0 && radio != undefined){
+                    $('input[name="radio"]:checked').click();
+                }
+            });
+            $('input[name="radio"]').click(function(){
+                var checked = $('input[name="radio"]:checked').val();
+                switch(checked){
+                    case "1":
+                        get_BillCalt();
+                        break;
+                    // case "2":
+                    //     get_Coverage();
+                    //     break;
+                    case "3":
+                        $('#BlrName').removeAttr('disabled');
+                        $('#BlrId').attr('disabled', 'disabled');
+                        $('#Coverage').attr('disabled', 'disabled');
+                        $('#StName').attr('disabled', 'disabled');
+                        $('#CatId').attr('disabled', 'disabled');
+                        $('#StName').empty();
+                        $('#StName').append($('<option>', {value: '', text: 'Populated with all State Names and National'}));
+                        $('#CatId').empty();
+                        $('#CatId').append($('<option>', {value: '', text: 'Select Biller Categories'}));
+                        $('#Coverage').empty();
+                        $('#Coverage').append($('<option>', {value: '', text: 'Populated with all City Names Within a State'}));
+                        $('#BlrId').val('');
+                        break;
+                    case "4":
+                        $('#BlrId').removeAttr('disabled');
+                        $('#BlrName').attr('disabled', 'disabled');
+                        $('#Coverage').attr('disabled', 'disabled');
+                        $('#StName').attr('disabled', 'disabled');
+                        $('#CatId').attr('disabled', 'disabled');
+                        $('#StName').empty();
+                        $('#StName').append($('<option>', {value: '', text: 'Populated with all State Names and National'}));
+                        $('#CatId').empty();
+                        $('#CatId').append($('<option>', {value: '', text: 'Select Biller Categories'}));
+                        $('#Coverage').empty();
+                        $('#Coverage').append($('<option>', {value: '', text: 'Populated with all City Names Within a State'}));
+                        $('#BlrName').val('');
+                        break;
+                    default:
+                        break;
+                }
+                // alert(checked);
+            });
+        </script>
+        <script>
+            function get_BillCalt(){
+                $('#CatId').removeAttr('disabled');
+                $('#BlrId').attr('disabled', 'disabled');
+                $('#Coverage').attr('disabled', 'disabled');
+                $('#StName').attr('disabled', 'disabled');
+                $('#BlrName').attr('disabled', 'disabled');
+
+                $.ajax({
+                    type: "GET",
+                    url: "/get_biller_catagory",
+                    dataType: 'html',
+					beforeSend: function () {
+                        // Show image container
+                        $("#loader").show();
+                        $('#display-content').hide();
+                    },
+                    success: function (result) {
+                        var res = JSON.parse(result);
+                        // console.log(res.length);
+                        if(res.length > 0){
+                            $('#StName').empty();
+                            $('#StName').append($('<option>', {value: '', text: 'Populated with all State Names and National'}));
+                            $('#CatId').empty();
+                            $('#CatId').append($('<option>', {value: '', text: 'Select Biller Categories'}));
+                            $.each(res, function (i, item) {
+                                if(item.CatId != '63'){
+                                    $('#CatId').append($('<option>', {value: item.CatId, text: item.CatName}));
+                                }
+                            });
+                        }
+                    },
+                    complete: function (data) {
+                        // Hide image container
+                        $("#loader").hide();
+                        $('#display-content').show();
+                    }
+                });
+
+            }
+            function get_Coverage(){
+				var cat_id = $('#CatId').val();
+                $('#StName').removeAttr('disabled');
+                $('#BlrId').attr('disabled', 'disabled');
+                // $('#CatId').attr('disabled', 'disabled');
+                $('#Coverage').attr('disabled', 'disabled');
+                $('#BlrName').attr('disabled', 'disabled');
+                $.ajax({
+                    type: "GET",
+                    url: "/get_state",
+					data: {"cat_id": cat_id},
+                    dataType: 'html',
+					beforeSend: function () {
+                        // Show image container
+                        $("#loader").show();
+                        $('#display-content').hide();
+                    },
+                    success: function (result) {
+                        var res = JSON.parse(result);
+                        // console.log(res.length);
+                        if(res.length > 0){
+                            // $('#CatId').empty();
+                            // $('#CatId').append($('<option>', {value: '', text: 'Select Biller Categories'}));
+                            $('#StName').empty();
+                            $('#StName').append($('<option>', {value: '', text: 'Populated with all State Names and National'}));
+                            $.each(res, function (i, item) {
+                                $('#StName').append($('<option>', {value: item.Id, text: item.Name}));
+                            });
+                        }
+                    },
+                    complete: function (data) {
+                        // Hide image container
+                        $("#loader").hide();
+                        $('#display-content').show();
+                    }
+                });
+
+            }
+            $('#StName').on('change', function(){
+                $('#Coverage').removeAttr('disabled');
+                $.ajax({
+                    type: "GET",
+                    url: "/get_biller_by_cov",
+                    data: {"cov": $("#StName").val(), "cat_id": $('#CatId').val()},
+                    dataType: 'html',
+					beforeSend: function () {
+                        // Show image container
+                        $("#loader").show();
+                        $('#display-content').hide();
+                    },
+                    success: function (result) {
+                        var res = JSON.parse(result);
+                         console.log(res);
+                        if (res.length > 0) {
+							$('#Coverage').empty();
+							$('#Coverage').append($('<option>', { value: '', text: 'Populated with all City Names Within a State' }));
+							$.each(res, function (i, item) {
+								$('#Coverage').append($('<option>', { value: item.BlrId, text: item.BlrName }));
+							});
+						}
+                    },
+                    complete: function (data) {
+                        // Hide image container
+                        $("#loader").hide();
+                        $('#display-content').show();
+                    }
+                });
+            })
+            $('#CatId').on('change', function(){
+                $('#StName').removeAttr('disabled');
+                $('#cat_name').val($('#CatId :selected').text());
+                get_Coverage();
+            })
+			$('#Coverage').on('change', function(){
+				$('#blr_name').val($('#Coverage :selected').text());
+			})
+            $('#check').on('click', function(){
+                var checked = $('input[name="radio"]:checked').val();
+                if(checked == "1"){
+                    if($('#CatId').val() == ''){
+                        alert('Please select Biller Category, Location');
+                        return false;
+                    }
+                    // else if($('#StName').val() == ''){
+                    //     alert('Please select Biller Category, Location');
+                    //     return false;
+                    // }
+                    // else if($('#Coverage').val() == ''){
+                    //     alert('Please select Biller Category, Location');
+                    //     return false;
+                    // }
+                    else{
+                        return true;
+                    }
+                }else if(checked == "3"){
+                    if($('#BlrName').val() == ''){
+                        alert('Please select Biller Name');
+                        return false;
+                    }else{
+                        return true;
+                    }
+                }else if(checked == "4"){
+                    if($('#BlrId').val() == ''){
+                        alert('Please select Biller Name');
+                        return false;
+                    }else{
+                        return true;
+                    }
+                }else{
+                    return false;
+                }
+            })
+        </script>

@@ -1,0 +1,137 @@
+<%- include('../template/header'); %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Bill Pay</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item active">Bill Pay</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title"></h3>
+                                <div class="card-tools">
+                                    <img src="/dist/img/BBPS_Logo.png" alt="BBPS" width="350" height="65">
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="bs-stepper">
+                                    <div class="bs-stepper-header" role="tablist">
+                                        <!-- your steps here -->
+                                        <div class="step active" data-target="#logins-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="logins-part" id="logins-part-trigger" aria-selected="true">
+                                                <span class="bs-stepper-circle">1</span>
+                                                <span class="bs-stepper-label">Select Biller</span>
+                                            </button>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="step" data-target="#information-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="information-part" id="information-part-trigger">
+                                                <span class="bs-stepper-circle">2</span>
+                                                <span class="bs-stepper-label">Confirm Biller</span>
+                                            </button>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="step" data-target="#payment-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="payment-part" id="payment-part-trigger">
+                                                <span class="bs-stepper-circle">3</span>
+                                                <span class="bs-stepper-label">Payment</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="bs-stepper-content mt-4">
+                                        <center><span>Please select a biller</span></center>
+                                        <!-- your steps content here -->
+                                        <div id="logins-part" class="content active dstepper-block mt-4" role="tabpanel"
+                                            aria-labelledby="logins-part-trigger">
+                                            <form action="/get_params" method="post">
+                                                <div class="row">
+                                                    <div class="col-md-4"></div>
+                                                    <div class="col-md-4">
+                                                        <div class="row">
+                                                            <div class="col-md-10">
+                                                                <div class="form-group">
+                                                                    <label for="CatId">Biller Category</label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="CatId" id="CatId"
+                                                                        placeholder="Biller Category" value="<%= cat_name; %>" readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-10">
+                                                                <div class="form-group">
+                                                                    <label>Billers</label>
+                                                                    <select class="form-control select2" name="BlrId" id="BlrId">
+                                                                        <option value="">Select Billers</option>
+                                                                        <% var biller_data = JSON.parse(biller_data);
+                                                                            biller_data.forEach((data) => { %>
+                                                                                <option value="<%= data.BlrId %>"><%= data.BlrName %></option>
+                                                                        <% }) %>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4"></div>
+                                                </div>
+                                                <input type="hidden" name="cat_id" id="cat_id" value="<%= cat_id; %>">
+                                                <input type="hidden" name="coverage" id="coverage" value="<%= coverage; %>">
+                                                <input type="hidden" name="biller_name" id="biller_name" value="">
+                                                <div class="row mt-4">
+                                                    <div class="col-md-4"></div>
+                                                    <div class="col-md-4">
+                                                        <a type="button" href="/fetch_bill"
+                                                            class="btn btn-outline-danger btn-flat pull-left">
+                                                            <i class="fa fa-caret-left mr-2"></i>Previous</a>
+                                                        <button type="submit"
+                                                            class="btn btn-outline-success btn-flat pull-right"
+                                                            onclick="return check();">Process
+                                                            <i class="fa fa-caret-right ml-2"></i></button>
+                                                    </div>
+                                                    <div class="col-md-4"></div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <%- include('../template/footer'); %>
+
+        
+        <script>
+            $('#BlrId').on('change', function(){
+                var blr_id = $(this).val();
+                $('#biller_name').val($('#BlrId :selected').text());
+            })
+            function check(){
+                if($('#BlrId').val() != ''){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        </script>

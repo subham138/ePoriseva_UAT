@@ -1,0 +1,408 @@
+<%- include('../template/header'); %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>General Form</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">General Form</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">bs-stepper</h3>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="bs-stepper">
+                                    <div class="bs-stepper-header" role="tablist">
+                                        <!-- your steps here -->
+                                        <div class="step" data-target="#logins-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="logins-part" id="logins-part-trigger">
+                                                <span class="bs-stepper-circle">1</span>
+                                                <span class="bs-stepper-label">Select Biller</span>
+                                            </button>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="step" data-target="#information-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="information-part" id="information-part-trigger">
+                                                <span class="bs-stepper-circle">2</span>
+                                                <span class="bs-stepper-label">Confirm Biller</span>
+                                            </button>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="step" data-target="#payment-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="payment-part" id="payment-part-trigger">
+                                                <span class="bs-stepper-circle">3</span>
+                                                <span class="bs-stepper-label">Payment</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="bs-stepper-content mt-4">
+                                        <!-- your steps content here -->
+                                        <div id="logins-part" class="content" role="tabpanel"
+                                            aria-labelledby="logins-part-trigger">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="icheck-success d-inline mr-4">
+                                                            <input type="radio" name="r1" id="radioSuccess1">
+                                                            <label for="radioSuccess1">
+                                                                Biller Category
+                                                            </label>
+                                                        </div>
+                                                        <div class="icheck-success d-inline mr-4">
+                                                            <input type="radio" name="r1" id="radioSuccess2">
+                                                            <label for="radioSuccess2">
+                                                                Coverage
+                                                            </label>
+                                                        </div>
+                                                        <div class="icheck-success d-inline mr-4">
+                                                            <input type="radio" name="r1" id="radioSuccess3">
+                                                            <label for="radioSuccess3">
+                                                                Biller Name
+                                                            </label>
+                                                        </div>
+                                                        <div class="icheck-success d-inline">
+                                                            <input type="radio" name="r1" id="radioSuccess4">
+                                                            <label for="radioSuccess4">
+                                                                Biller ID
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-4">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label>Biller Category</label>
+                                                                <select class="form-control select2">
+                                                                    <option>Populated with all Active biller Categories
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label>Coverage</label>
+                                                                <select class="form-control select2">
+                                                                    <option>Populated with all State Names and National
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label></label>
+                                                                <select class="form-control select2">
+                                                                    <option>Populated with all City Names Within a State
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label for="biller_name">Biller Name</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="biller_name" id="biller_name"
+                                                                    placeholder="Biller Name">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label for="biller_id">Biller ID</label>
+                                                                <input type="text" class="form-control" name="biller_id"
+                                                                    id="biller_id" placeholder="Biller ID">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <button type="button" class="btn btn-outline-info btn-flat mt-4"
+                                                onclick="stepper.next()">
+                                                <i class="fa fa-search mr-2"></i>Search</button>
+                                        </div>
+                                        <div id="information-part" class="content" role="tabpanel"
+                                            aria-labelledby="information-part-trigger">
+                                            <div class="row">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label for="biller_name">Biller Name</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="biller_name" id="biller_name"
+                                                                    placeholder="Biller Name">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label for="payee_mob_no">Payee Mobile Number</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="payee_mob_no" id="payee_mob_no"
+                                                                    placeholder="Payee Mobile Number">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label for="consumer_no">Consumer Number</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="consumer_no" id="consumer_no"
+                                                                    placeholder="Consumer Number">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4"></div>
+                                            </div>
+                                            <div class="row mt-4">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-4">
+                                                    <button type="button"
+                                                        class="btn btn-outline-danger btn-flat pull-left"
+                                                        onclick="stepper.previous()">
+                                                        <i class="fa fa-caret-left mr-2"></i>Previous</button>
+                                                    <button type="button"
+                                                        class="btn btn-outline-success btn-flat pull-right"
+                                                        onclick="stepper.next()">Process
+                                                        <i class="fa fa-caret-right ml-2"></i></button>
+                                                </div>
+                                                <div class="col-md-4"></div>
+                                            </div>
+
+                                        </div>
+                                        <div id="payment-part" class="content" role="tabpanel"
+                                            aria-labelledby="payment-part-trigger">
+                                            <div class="row mt-4">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label for="biller_name">Biller Name</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="biller_name" id="biller_name"
+                                                                    placeholder="Biller Name">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label for="consumer_no">Consumer Number</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="consumer_no" id="consumer_no"
+                                                                    placeholder="Consumer Number">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label for="consumer_name">Consumer Name</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="consumer_name" id="consumer_name"
+                                                                    placeholder="Consumer Name">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label for="bill_date">Bill Date</label>
+                                                                <input type="date" class="form-control" name="bill_date"
+                                                                    id="bill_date" placeholder="Bill Date">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label for="bill_period">Bill Period</label>
+                                                                <input type="date" class="form-control"
+                                                                    name="bill_period" id="bill_period"
+                                                                    placeholder="Bill Period">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label for="bill_no">Bill Number</label>
+                                                                <input type="number" class="form-control" name="bill_no"
+                                                                    id="bill_no" placeholder="Bill Number">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label for="bill_due_dt">Bill Due Date</label>
+                                                                <input type="date" class="form-control"
+                                                                    name="bill_due_dt" id="bill_due_dt"
+                                                                    placeholder="Bill Due Date">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label for="payee_mob_no">Payee Mobile Number</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="payee_mob_no" id="payee_mob_no"
+                                                                    placeholder="Payee Mobile Number">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <table width="100%">
+                                                                <tr>
+                                                                    <th>Bill to be Paid</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="form-group clearfix">
+                                                                            <div class="icheck-success d-inline">
+                                                                                <input type="checkbox"
+                                                                                    id="checkboxSuccess1">
+                                                                                <label for="checkboxSuccess1">Base Bill
+                                                                                    Amount
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="form-group clearfix">
+                                                                            <div class="icheck-success d-inline">
+                                                                                <input type="checkbox"
+                                                                                    id="checkboxSuccess2">
+                                                                                <label for="checkboxSuccess2">Option B
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="form-group clearfix">
+                                                                            <div class="icheck-success d-inline">
+                                                                                <input type="checkbox"
+                                                                                    id="checkboxSuccess3">
+                                                                                <label for="checkboxSuccess3">Option A
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="form-group clearfix">
+                                                                            <div class="icheck-success d-inline">
+                                                                                <input type="checkbox"
+                                                                                    id="checkboxSuccess4">
+                                                                                <label for="checkboxSuccess4">Option C
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                            <div class="form-group">
+                                                                <label for="payee_mob_no">Payee Mobile Number</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="payee_mob_no" id="payee_mob_no"
+                                                                    placeholder="Payee Mobile Number">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label for="amt">Amount</label>
+                                                                <input type="text" class="form-control" name="amt"
+                                                                    id="amt" placeholder="Amount">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label>Select Payment Mode</label>
+                                                                <select class="form-control select2">
+                                                                    <option>Cash</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label for="cus_conv_fee">Customer Convenience
+                                                                    Fees</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="cus_conv_fee" id="cus_conv_fee"
+                                                                    placeholder="Customer Convenience Fees">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group">
+                                                                <label for="tot_amt">Total Amount</label>
+                                                                <input type="text" class="form-control" name="tot_amt"
+                                                                    id="tot_amt" placeholder="Total Amount">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-outline-danger btn-flat pull-left"
+                                                onclick="stepper.previous()">
+                                                <i class="fa fa-caret-left mr-2"></i>Previous</button>
+                                            <button type="button"
+                                                class="btn btn-outline-success btn-flat pull-right">Pay</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <%- include('../template/footer'); %>
